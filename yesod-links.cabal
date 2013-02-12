@@ -1,5 +1,5 @@
 name:                yesod-links
-version:             0.2
+version:             0.2.1
 description:         A yesod goody, yesod links
 synopsis:            A typeclass which simplifies creating link widgets throughout your site
 homepage:            http://github.com/pbrisbin/yesod-goodies/yesod-links
