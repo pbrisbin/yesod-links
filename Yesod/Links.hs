@@ -20,18 +20,18 @@ module Yesod.Links
     , link'
     ) where
 
+import Data.Text  (Text)
 import Yesod.Core (Route, GWidget, whamlet)
-import qualified Data.Text as T
 
 -- | An internal route or external url
-data Destination m = Internal (Route m) | External T.Text
+data Destination m = Internal (Route m) | External Text
 
 -- | A link to a 'Destination' with supplied titles and text to be used 
 --   when showing the html.
 data Link m = Link
     { linkDest  :: Destination m
-    , linkTitle :: T.Text
-    , linkText  :: T.Text
+    , linkTitle :: Text
+    , linkText  :: Text
     }
 
 -- | A type family class used to generalize widgets printing routes that 
