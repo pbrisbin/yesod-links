@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP          #-}
 {-# LANGUAGE QuasiQuotes  #-}
 {-# LANGUAGE TypeFamilies #-}
 -------------------------------------------------------------------------------
@@ -69,10 +68,10 @@ link = link' . toLink
 -- | Link to a raw @'Link'@. Can be used even if your site is not an
 --   instance of 'YesodLinked'.
 link' :: Link m -> GWidget s m ()
-#if __GLASGOW_HASKELL__ >= 700
-link' (Link (Internal i) t x) = [whamlet|<a title="#{t}" href="@{i}">#{x}|]
-link' (Link (External e) t x) = [whamlet|<a title="#{t}" href="#{e}">#{x}|]
-#else
-link' (Link (Internal i) t x) = [$whamlet|<a title="#{t}" href="@{i}">#{x}|]
-link' (Link (External e) t x) = [$whamlet|<a title="#{t}" href="#{e}">#{x}|]
-#endif
+link' (Link (Internal i) t x) = [whamlet|$newline never
+    <a title="#{t}" href="@{i}">#{x}
+    |]
+
+link' (Link (External e) t x) = [whamlet|$newline never
+    <a title="#{t}" href="#{e}">#{x}
+    |]
