@@ -21,7 +21,7 @@ module Yesod.Links
     ) where
 
 import Data.Text  (Text)
-import Yesod.Core (Route, GWidget, whamlet)
+import Yesod.Core (Route, WidgetT, whamlet)
 
 -- | An internal route or external url
 data Destination m = Internal (Route m) | External Text
@@ -62,12 +62,12 @@ class IsLink a where
     toLink :: a -> Link Linked
 
 -- | Link to any @'IsLink'@ type. This is simply @'link'' . 'toLink'@.
-link :: IsLink a => a -> GWidget s Linked ()
+link :: IsLink a => a -> WidgetT Linked IO ()
 link = link' . toLink
 
 -- | Link to a raw @'Link'@. Can be used even if your site is not an
 --   instance of 'YesodLinked'.
-link' :: Link m -> GWidget s m ()
+link' :: Link m -> WidgetT m IO ()
 link' (Link (Internal i) t x) = [whamlet|$newline never
     <a title="#{t}" href="@{i}">#{x}
     |]
